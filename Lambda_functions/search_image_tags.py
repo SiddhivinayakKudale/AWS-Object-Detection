@@ -107,11 +107,9 @@ def search_url(tag_list):
     table = dynamodb.Table('image_tags')
     response = table.scan()
     data = response['Items']
-    print("data us", data)
     dict1 = dict()
     for test1 in data:
         dict1.update({test1["url"]: test1["tags"]})
-    print("dictionary", dict1)
     lst = []
     for key, value in dict1.items():
         if set(tag_list) == value:
