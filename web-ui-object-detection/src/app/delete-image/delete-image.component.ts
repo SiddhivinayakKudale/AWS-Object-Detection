@@ -19,7 +19,9 @@ export class DeleteImageComponent implements OnInit {
     params = params.append('url',data.urlid);
     const deletetag$ = this.http.delete("https://s3z0vxy2y2.execute-api.us-east-1.amazonaws.com/1",{params: params});
     console.log(deletetag$)
-    deletetag$.subscribe();
+    deletetag$.subscribe(res => {
+     alert(res);
+    });
  }
 
 }

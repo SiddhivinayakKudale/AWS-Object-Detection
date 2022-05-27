@@ -18,7 +18,7 @@ export class SearchByTagsComponent implements OnInit {
     let params = new HttpParams();
     params = params.append('tag',data.tag1);
     params = params.append('tag2',data.tag2);
-    const searchtag$ = this.http.get("https://s3z0vxy2y2.execute-api.us-east-1.amazonaws.com/1",{params: params});
+    const searchtag$ = this.http.get("https://i25utoeijd.execute-api.us-east-1.amazonaws.com/dev/tags",{params: params});
 
     searchtag$.subscribe(res => {
                  this.tags = res;

@@ -61,14 +61,8 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Enter Tag1</span>
         </div>
-        <input type="text" class="form-control" aria-label="With textarea" name = "tag1" placeholder = "Enter Tag 1" ngModel/>
-      </div>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Enter Tag2</span>
-        </div>
-        <input type="text" class="form-control" aria-label="With textarea" name = "tag2" placeholder = "Enter Tag 2" ngModel/>
-      </div>
+        <input type="text" class="form-control" aria-label="With textarea" name = "tags" placeholder = "Enter Tags with comma separated" ngModel/>
+    </div>
       <br/>
     <input type = "submit" class="btn btn-primary" value = "submit">
     
@@ -84,7 +78,7 @@
     </thead>
     <tbody>
       <tr>
-        <td>{{tags}}</td>
+        <td>{{result}}</td>
       </tr>
     </tbody>
   </table>

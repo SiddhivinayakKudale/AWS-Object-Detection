@@ -22,7 +22,7 @@
 </div>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <a class="navbar-brand" href="#">Home</a>
+  <a class="navbar-brand"  routerLink="/home-component">Home</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -32,14 +32,23 @@
         <a class="nav-link" routerLink="/upload-image">Upload Image</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">View Images</a>
+        <a class="nav-link" routerLink="/app-search-by-tags">Search Image</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Delete Image</a>
-      </li>   
+        <a class="nav-link" routerLink="/search-image-tag-multiple">Search Image By Multiple Tags</a>
+      </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Search Image</a>
-      </li> 
+        <a class="nav-link" routerLink="/search-image-tag">Get Images by Tags of Image</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/update-delete-tag">Add/Removal of Tags</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/delete-image">Delete Image</a>
+      </li>
+      <li class="nav-item navbar-right">
+        <a class="nav-link" routerLink="/signout">Sign Out</a>
+      </li>   
     </ul>
   </div>  
 </nav>

@@ -22,7 +22,7 @@
 </div>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <a class="navbar-brand" href="#">Home</a>
+  <a class="navbar-brand"  routerLink="/home-component">Home</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -32,14 +32,23 @@
         <a class="nav-link" routerLink="/upload-image">Upload Image</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">View Images</a>
+        <a class="nav-link" routerLink="/app-search-by-tags">Search Image</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/search-image-tag-multiple">Search Image By Multiple Tags</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/search-image-tag">Get Images by Tags of Image</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/update-delete-tag">Add/Removal of Tags</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/delete-image">Delete Image</a>
+      </li>
+      <li class="nav-item navbar-right">
+        <a class="nav-link" routerLink="/delete-image">Sign Out</a>
       </li>   
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/app-search-by-tags">Search Image</a>
-      </li> 
     </ul>
   </div>  
 </nav>
@@ -48,39 +57,58 @@
   <div class="row">
     <div class="col-sm-4">
       <h2>Features</h2>
-      <h5>--------------:</h5>
-      <div class="fakeimg">Fake Image</div>
-      <p>-----------------------</p>
-      <h3>Some Links</h3>
-      <p>Lorem ipsum dolor sit ame.</p>
+      
+      <div class="fakeimg">
+        <ul>
+          <li>Authentication and Authorisation</li>
+          <li>S3 Bucket to store images</li>
+          <li>Object Detection using YOLO</li>
+          <li>Lambda for Serverless operations</li>
+          <li>DynamoDB to Store Detected Objects</li>
+          <li>API Gateway to expose REST API's</li>
+          <li>Perform operations on images from UI</li>
+        </ul> 
+      </div>
+      
+      <br/>
+      <h3>Team Members</h3>
       <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Active</a>
+          <a class="nav-link" href="#">Arun</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#">Sangamesh</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#">Mohan</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
+          <a class="nav-link" href="#">Siddhivinayak</a>
         </li>
       </ul>
       <hr class="d-sm-none">
     </div>
     <div class="col-sm-8">
       <h2>Description of Assignment</h2>
-      <h5>------------------------</h5>
-      <div class="fakeimg">----------</div>
-      <p>Some text..</p>
-      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+      
+      <div class="fakeimg">
+        <p>Providing AWS Cloud-based solution that exploits services such as S3, Lambda, API
+          Gateway and database service to build a system for automated object-detection tagging
+          and query handling. We have produced a solution that allows end-users to upload their images into
+          an S3 bucket. Upon uploading of an image to a designated S3 bucket, a lambda function is automatically
+          triggered that uses the Yolo object detection feature and finds the list of objects in the image and stores
+          the list of detected objects along with the URL of the image (S3 URL) in a database. Further, the end-user
+          submits queries to an API endpoint using API Gateway to search tagged images</p>
+      </div>
+      <br/>
+      <h2>Some More Information</h2>
+      <p>This Project aims at building a cloudified online system that allows users to store the images and
+        retrieve the images based on the auto-generated tags. The focus of this Project is to design a serverless
+        application that allows the client to upload their images to public cloud storage. Upon the image upload,
+        the application automatically tags the image with the type of objects detected in it, for example, person,
+        car, etc. Later on, clients can query images based on the type of objects in the images. To this end, the
+        application provides users with a list of URLs for images that include specific queried objects.</p>
       <br>
-      <h2>TITLE HEADING</h2>
-      <h5>Title description, Sep 2, 2017</h5>
-      <div class="fakeimg">Fake Image</div>
-      <p>Some text..</p>
-      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
     </div>
   </div>
 </div>
