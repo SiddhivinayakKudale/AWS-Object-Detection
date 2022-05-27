@@ -127,6 +127,6 @@ def search_url(tag_list):
         element = i.split("/")
         image = element[-1]
         url = s3_client.generate_presigned_url(ClientMethod='get_object',
-                                               Params={'Bucket': 'direct-upload-sid', 'Key': image})
+                                               Params={'Bucket': 'direct-upload-sid', 'Key': image}, ExpiresIn=600)
         signed_url_list.append(url)
     return signed_url_list

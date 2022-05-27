@@ -22,7 +22,7 @@ def lambda_handler(event, context):
     for i in lst:
         element = i.split("/")
         image = element[-1]
-        url = s3.generate_presigned_url(ClientMethod='get_object', Params={'Bucket': 'direct-upload-sid', 'Key': image})
+        url = s3.generate_presigned_url(ClientMethod='get_object', Params={'Bucket': 'direct-upload-sid', 'Key': image}, ExpiresIn=600)
         signed_url_list.append(url)
 
     return {
