@@ -1,6 +1,6 @@
 import json
 import boto3
-import os 
+import os
 import sys
 import uuid
 import cv2
@@ -13,17 +13,19 @@ s3_client = boto3.client('s3')
 confthres = 0.3
 nmsthres = 0.1
 
+
 def load_model(configpath, weightspath):
     print("[INFO] loading YOLO from disk...")
     net = cv2.dnn.readNetFromDarknet(configpath, weightspath)
     return net
-    
+
+
 def do_prediction(image, net, LABELS):
-   #  print("image",image)
+    #  print("image",image)
     (H, W) = image.shape[:2]
     ln = net.getLayerNames()
     ln = [ln[i - 1] for i in net.getUnconnectedOutLayers()]
-   #  print(ln)
+    #  print(ln)
     blob = cv2.dnn.blobFromImage(image, 1 / 255.0, (416, 416),
                                  swapRB=True, crop=False)
     net.setInput(blob)
@@ -55,12 +57,14 @@ def do_prediction(image, net, LABELS):
         if len(idxs) > 0:
             for i in idxs.flatten():
                 if (str(LABELS[classIDs[i]]) not in detected_objects) and (confidences[i] >
-                                                                   0.5):
+                                                                           0.5):
                     detected_objects.append(str(LABELS[classIDs[i]]))
     return detected_objects
-    
+
+
 def decodebstring(bstring):
     return bstring.decode('ascii')
+
 
 YOLO_BUCKET = 'yolo-bucket-aws'
 labelskey = "coco.names"
@@ -74,16 +78,27 @@ wkey = "yolov3-tiny.weights"
 Weights = "/tmp/yolov3-tiny.weights"
 s3_client.download_file(YOLO_BUCKET, wkey, Weights)
 
+
 def lambda_handler(event, context):
-   tags = json.loads(event["body"].encode('utf-8'))
-   data = tags['contents']
-   image_bytes = base64.b64decode(data)
-   objects = detect_objects(image_bytes)
-   final = search_url(objects)
-   return {
+    tags = json.loads(event["body"].encode('utf-8'))
+    # tags = json.loads(event["body"])
+    data = tags['contents']
+    image_bytes = base64.b64decode(data)
+    objects = detect_objects(image_bytes)
+    final = search_url(objects)
+    return {
         'statusCode': 200,
-        'body': json.dumps(final)
+        'body': json.dumps(final),
+        'headers': {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,PUT,DELETE",
+            # "Access-Control-Allow-Credentials" : true,
+            "Access-Control-Allow-Origin": "*",
+            "X-Requested-With": "*"
+        }
     }
+
 
 def detect_objects(image_bytes):
     # load the neural net. Should be local to this method as its multi-threaded endpoint
@@ -93,19 +108,25 @@ def detect_objects(image_bytes):
     res = do_prediction(img, nets, Lables)
     return res
 
+
 def search_url(tag_list):
-   client = boto3.client('dynamodb')
-   dynamodb = dynamodb = boto3.resource('dynamodb')
-   table = dynamodb.Table('image_tags')
-   response = table.scan()
-   data = response['Items']
-   print("data us",data)
-   dict1 = dict()
-   for test1 in data:
-      dict1.update({test1["url"]:test1["tags"]})
-   print("dictionary",dict1)
-   lst = []
-   for key,value in dict1.items():
-      if set(tag_list) == value:
-        lst.append(key)
-   return lst
+    client = boto3.client('dynamodb')
+    dynamodb = dynamodb = boto3.resource('dynamodb')
+    table = dynamodb.Table('image_tags')
+    response = table.scan()
+    data = response['Items']
+    dict1 = dict()
+    for test1 in data:
+        dict1.update({test1["url"]: test1["tags"]})
+    lst = []
+    for key, value in dict1.items():
+        if set(tag_list) == value:
+            lst.append(key)
+    signed_url_list = []
+    for i in lst:
+        element = i.split("/")
+        image = element[-1]
+        url = s3_client.generate_presigned_url(ClientMethod='get_object',
+                                               Params={'Bucket': 'direct-upload-sid', 'Key': image})
+        signed_url_list.append(url)
+    return signed_url_list
