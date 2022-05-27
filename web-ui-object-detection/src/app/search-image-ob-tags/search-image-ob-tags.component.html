@@ -54,37 +54,13 @@
 </nav>
 
 
-<form #userlogin = "ngForm" (ngSubmit) = "onClickSubmit(userlogin.value)" >
-    <!--<input type = "text" name = "url" placeholder = "Enter URL" ngModel> -->
-    <br/>
-    <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Enter Tag1</span>
-        </div>
-        <input type="text" class="form-control" aria-label="With textarea" name = "tag1" placeholder = "Enter Tag 1" ngModel/>
-      </div>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Enter Tag2</span>
-        </div>
-        <input type="text" class="form-control" aria-label="With textarea" name = "tag2" placeholder = "Enter Tag 2" ngModel/>
-      </div>
-      <br/>
-    <input type = "submit" class="btn btn-primary" value = "submit">
-    
- </form>
-
+<label class="image-upload-container btn btn-bwm">
+    <span>Select Image</span>
+    <input #imageInput
+           type="file"
+           accept="image/*"
+           (change)="processFile(imageInput)">
+  </label>
 <br/>
 <br/>
- <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">URLS</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{tags}}</td>
-      </tr>
-    </tbody>
-  </table>
+  {{result}}

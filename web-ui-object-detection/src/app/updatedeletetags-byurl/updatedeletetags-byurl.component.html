@@ -59,32 +59,23 @@
     <br/>
     <div class="input-group">
         <div class="input-group-prepend">
-          <span class="input-group-text">Enter Tag1</span>
+          <span class="input-group-text">Enter URL</span>
         </div>
-        <input type="text" class="form-control" aria-label="With textarea" name = "tag1" placeholder = "Enter Tag 1" ngModel/>
-      </div>
-      <div class="input-group">
+        <input type="text" class="form-control" aria-label="With textarea" name = "url" placeholder = "Enter the URL" ngModel/>
+    </div>
+    <div class="input-group">
         <div class="input-group-prepend">
-          <span class="input-group-text">Enter Tag2</span>
+          <span class="input-group-text">Enter Type</span>
         </div>
-        <input type="text" class="form-control" aria-label="With textarea" name = "tag2" placeholder = "Enter Tag 2" ngModel/>
-      </div>
+        <input type="text" class="form-control" aria-label="With textarea" name = "type" placeholder = "Enter 1 for update/ 0 for delete " ngModel/>
+    </div>
+    <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Enter Tag</span>
+        </div>
+        <input type="text" class="form-control" aria-label="With textarea" name = "tag" placeholder = "Enter tag" ngModel/>
+    </div>
       <br/>
     <input type = "submit" class="btn btn-primary" value = "submit">
     
  </form>
-
-<br/>
-<br/>
- <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">URLS</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{tags}}</td>
-      </tr>
-    </tbody>
-  </table>
